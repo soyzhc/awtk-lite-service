@@ -26,8 +26,8 @@
 
 BEGIN_C_DECLS
 
-
-typedef ret_t (*request_queue_on_request_t)(void* ctx, uint32_t cmd, uint32_t payload_size, const void* payload);
+typedef ret_t (*request_queue_on_request_t)(void* ctx, uint32_t cmd, uint32_t payload_size,
+                                            const void* payload);
 
 /**
  * @class request_queue_t
@@ -48,11 +48,10 @@ typedef struct _request_queue_t {
   uint32_t max_payload_size;
   void* on_request_ctx;
   request_queue_on_request_t on_request;
-}request_queue_t;
+} request_queue_t;
 
 /**
  * @method request_queue_create
- *
  * 创建request queue对象。
  *
  * @param {uint32_t} size Buffer的大小。
@@ -62,11 +61,11 @@ typedef struct _request_queue_t {
  *
  * @return {request_queue_t*} 返回request_queue对象。
  */
-request_queue_t* request_queue_create(uint32_t size, uint32_t max_payload_size, request_queue_on_request_t on_request, void* on_request_ctx);
+request_queue_t* request_queue_create(uint32_t size, uint32_t max_payload_size,
+                                      request_queue_on_request_t on_request, void* on_request_ctx);
 
 /**
  * @method request_queue_send
- *
  * 发送一个请求。
  *
  * @param {request_queue_t*} q request_queue对象。
@@ -76,11 +75,11 @@ request_queue_t* request_queue_create(uint32_t size, uint32_t max_payload_size, 
  *
  * @return {ret_t} 返回RET_OK表示成功，否则表示失败。
  */
-ret_t request_queue_send(request_queue_t* q, uint32_t cmd, uint32_t payload_size, const void* payload);
+ret_t request_queue_send(request_queue_t* q, uint32_t cmd, uint32_t payload_size,
+                         const void* payload);
 
 /**
  * @method request_queue_process
- *
  * 处理队列中的请求(由服务线程调用)。
  *
  * @param {request_queue_t*} q request_queue对象。
@@ -92,7 +91,6 @@ ret_t request_queue_process(request_queue_t* q, uint32_t max_requests);
 
 /**
  * @method request_queue_destroy
- *
  * 销毁队列。
  *
  * @param {request_queue_t*} q request_queue对象。
@@ -110,4 +108,3 @@ ret_t request_queue_write_data(request_queue_t* q, const uint8_t* payload, uint3
 END_C_DECLS
 
 #endif /*TK_REQUEST_QUEUE_H*/
-
